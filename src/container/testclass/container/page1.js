@@ -1,6 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import P from 'prop-types';
 
 // ==================
@@ -22,9 +20,4 @@ class Page1 extends React.Component {
   }
 }
 
-export default connect(
-  state => ({}),
-  dispatch => ({
-    actions: bindActionCreators({}, dispatch)
-  })
-)(Page1);
+export default Page1;

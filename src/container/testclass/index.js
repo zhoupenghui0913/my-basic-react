@@ -1,21 +1,18 @@
 /** 测试页 **/
 
-/** 所需的各种插件 **/
 import React from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch, Link } from 'react-router-dom';
 import P from 'prop-types';
 
-/** 所需的所有资源 **/
 import { Button, Modal, message, Form } from 'antd';
 import './index.less';
-import ImgTest from '../../assets/test.jpg';
-import Mp3 from '../../assets/starSky.mp3';
+import ImgTest from 'src/assets/test.jpg';
+import Mp3 from 'src/assets/starSky.mp3';
 import Page1 from './container/page1'; // 子页面1
 import Page2 from './container/page2'; // 子页面2
 import Page3 from './container/page3'; // 子页面3
 
-/** 组件 **/
 class TestPageContainer extends React.Component {
   static propTypes = {
     count: P.number, // 来自store - test model中的全局变量count
@@ -26,7 +23,6 @@ class TestPageContainer extends React.Component {
     form: P.any // antd的form表单高阶组件自动注入的form对象
   };
 
-  /** react生命周期 - 构造函数 **/
   constructor(props) {
     super(props);
     this.state = {
@@ -37,19 +33,8 @@ class TestPageContainer extends React.Component {
     };
   }
 
-  /** react生命周期 - 废弃 - 组件初始化完毕DOM挂载之前 触发1次 **/
-  UNSAFE_componentWillMount() {}
-
-  /** react生命周期 - 组件初始化完毕DOM挂载完毕后 触发1次 **/
   componentDidMount() {
     console.log('所有页面默认拥有的3个对象：', this.props.location, this.props.match, this.props.history);
-    const set = new Set([1, 2, 3]);
-    const map = new Map();
-    console.log('Set 和 Map 测试:', set, map);
-
-    const a = { a: 1, b: 2, c: 3 };
-    const b = { d: 4, ...a };
-    console.log('obj的扩展运算符测试：', b);
 
     // 获取用户信息测试
     this.props.actions
@@ -65,85 +50,6 @@ class TestPageContainer extends React.Component {
       });
   }
 
-  /**
-   * react生命周期 - 是否执行下一次render
-   * 当有props或state改变时，可手动决定是否更新
-   * @param nextProps 下一轮最新的props对象
-   * @param nextState 下一轮最新的state对象
-   * @returns {boolean} 返回true表示更新，返回false表示跳过本次render
-   */
-  shoudComponentUpdate(nextProps, nextState) {
-    return true;
-  }
-
-  /**
-   * react生命周期 - 废弃 - 是否执行下一次render
-   * props对象有变化时触发
-   * @param nextProps 变化后的最新的props
-   */
-  UNSAFE_componentWillReceiveProps(nextProps) {}
-
-  /**
-   * react生命周期 - props改变时触发
-   * @param nextProps 下一轮最新的props对象
-   * @param prevState 当前的state对象
-   * @returns {object} 返回一个对象或null，如果返回对象将自动覆盖this.state中对应的值
-   */
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.count !== prevState.count) {
-      return {
-        count: nextProps.count
-      };
-    }
-    return null;
-  }
-
-  /**
-   * react生命周期 - 废弃 - 每次组件的props和state有变动时，触发1次
-   * @param nextProps 下一轮最新的props
-   * @param nextStates 下一轮最新的state
-   */
-  UNSAFE_componentWillUpdate(nextProps, nextStates) {}
-
-  /** react生命周期
-   * 在下一轮render即将开始时触发，比componentWillUpdate后执行
-   * 即合并了所有的this.setState操作，最后真正要开始render时触发
-   * 不应该在这里调用this.setState，会进入死循环
-   * @param prevProps 当前的this.props对象
-   * @param prevState 当前的this.state对象
-   * @returns {any} 返回值将作为componentDidUpdate的第3个参数传入
-   * **/
-  getSnapshotBeforeUpdate(prevProps, prevState) {
-    return null;
-  }
-
-  /**
-   * react生命周期 - 每次组件的props参数或state参数改变引起重新render完成后，触发1次
-   * @param prevProps render完成后当前的this.props对象
-   * @param prevState render完成后当前的this.state对象
-   */
-  componentDidUpdate(prevProps, prevState) {}
-
-  /**
-   * react生命周期 - 每次当前组件下的子组件中有任何报错时，触发1次
-   * 这个方法比componentDidCatch先调用，在state更新之前调用
-   * 所以可以在这个方法里改变state值，以显示给用户错误的提示而不会有空窗期
-   * @param error 报的是什么错
-   */
-  static getDerivedStateFromError(error, info) {}
-
-  /**
-   * react生命周期 - 每次当前组件下的子组件中有任何报错时，触发1次
-   * @param error 报的是什么错
-   * @param info 错误的触发记录，会显示代码哪一行报的错
-   */
-  componentDidCatch(error, info) {}
-
-  /**
-   * react生命周期 - 组件即将被卸载时触发
-   * **/
-  componentWillUnmount() {}
-
   // 打开模态框按钮被点击时触发
   onBtnClick() {
     this.setState({
@@ -158,7 +64,7 @@ class TestPageContainer extends React.Component {
     });
   }
 
-  // Ajax测试按钮被点击时触发（这里是直接在类中定义箭头函数的语法）
+  // Ajax测试按钮被点击时触发
   onAjaxClick = () => {
     this.props.actions.serverAjax().then(res => {
       if (res.status === 200) {
@@ -185,7 +91,7 @@ class TestPageContainer extends React.Component {
   }
 
   render() {
-    const { form } = this.props;
+    console.log('testclass render props', this.props);
 
     return (
       <div className='page-test'>
@@ -197,14 +103,6 @@ class TestPageContainer extends React.Component {
               <img src={ImgTest} style={{ height: '150px' }} />
               <span className='backImage' />
               <span>上方图片，一张是img,一张是background</span>
-              <br />
-              <span>请特别注意，现在webpack.production.config.js中的publicPath配置为"/"，</span>
-              <br />
-              <span>如果你的项目最终打包后放到服务器上的访问路径为https://xxx.com，这没有问题</span>
-              <br />
-              <span>
-                如果你的项目访问路径为https://xxx.com/aaa，请把webpack.production.config.js中的publicPath配置为"/aaa/"
-              </span>
             </p>
           </div>
           <div className='list'>

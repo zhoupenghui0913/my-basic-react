@@ -1,7 +1,7 @@
 /** Loading组件 用于按需加载时过渡显示等 **/
 import React from 'react';
 import './index.less';
-import ImgLoading from '../../assets/loading.gif';
+import ImgLoading from 'src/assets/loading.gif';
 export default function LoadingComponent(props) {
   function makeType(p) {
     let msg;

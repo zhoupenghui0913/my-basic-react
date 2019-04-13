@@ -1,7 +1,6 @@
 /** 路由页 - 真正意义上的根组件，已挂载到redux上，可获取store中的内容 **/
 
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
 import { Router, Route, Switch, Redirect } from 'react-router-dom';
 
 // import {createBrowserHistory as createHistory} from "history/"; // URL模式的history
@@ -19,10 +18,6 @@ const Home = Loadable({
   loader: () => import(/* webpackChunkName:'home' */ '../home'),
   loading: Loading, // 自定义的Loading动画组件
   timeout: 10000 // 可以设置一个超时时间(s)来应对网络慢的情况（在Loading动画组件中可以配置error信息）
-});
-const Test = Loadable({
-  loader: () => import(/* webpackChunkName:'test' */ '../testhooks'),
-  loading: Loading
 });
 const TestClass = Loadable({
   loader: () => import(/* webpackChunkName:'testclass' */ '../testclass'),
@@ -50,14 +45,7 @@ function RootRouterContainer(props) {
     Loadable.preloadAll();
   }, []);
 
-  /** 简单权限控制 **/
   function onEnter(Component, props) {
-    // 例子：如果没有登录，直接跳转至login页
-    // if (sessionStorage.getItem('userInfo')) {
-    //   return <Component {...props} />;
-    // } else {
-    //   return <Redirect to='/login' />;
-    // }
     return <Component {...props} />;
   }
 
@@ -71,7 +59,6 @@ function RootRouterContainer(props) {
                 <Redirect exact from='/' to='/home' />
                 <Route path='/home' render={props => onEnter(Home, props)} />
                 <Route path='/features' render={props => onEnter(Features, props)} />
-                <Route path='/testhooks' render={props => onEnter(Test, props)} />
                 <Route path='/testclass' render={props => onEnter(TestClass, props)} />
                 <Route component={NotFound} />
               </Switch>
@@ -85,9 +72,4 @@ function RootRouterContainer(props) {
   ];
 }
 
-export default connect(
-  state => ({}),
-  dispatch => ({
-    actions: {}
-  })
-)(RootRouterContainer);
+export default RootRouterContainer;
