@@ -1,8 +1,8 @@
 /** 全局唯一数据中心 **/
 import { init } from '@rematch/core';
 
-import app from '../models/app';
-import test from '../models/test';
+import app from 'src/models/app';
+import test from 'src/models/test';
 
 export default init({
   models: {
