@@ -24,6 +24,15 @@ export default function Menu() {
         }}>
         测试(class)
       </Link>
+      |
+      <Link
+        to={{
+          pathname: '/testsaga',
+          search: '?a=123&b=abc',
+          state: { c: '456', d: 'ABC' }
+        }}>
+        测试(saga)
+      </Link>
     </div>
   );
 }
