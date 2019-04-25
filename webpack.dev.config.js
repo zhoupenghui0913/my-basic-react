@@ -41,14 +41,30 @@ module.exports = {
       {
         // .css 解析
         test: /\.css$/,
-        use: ["style-loader", "css-loader", "postcss-loader"]
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              localIdentName: '[local]_[hash:base64:5]',
+            },
+          },
+          'postcss-loader',
+        ],
       },
       {
         // .less 解析
         test: /\.less$/,
         use: [
           "style-loader",
-          "css-loader",
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              localIdentName: '[local]_[hash:base64:5]',
+            },
+          },
           "postcss-loader",
           { loader: "less-loader", options: { javascriptEnabled: true } }
         ]

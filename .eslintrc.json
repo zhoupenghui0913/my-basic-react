@@ -10,7 +10,9 @@
     "ecmaVersion": 9,
     "ecmaFeatures": {
       "impliedStrict": true,
-      "jsx": true
+      "jsx": true,
+      "legacyDecorators": true,
+      "experimentalObjectRestSpread": true
     },
     "allowImportExportEverywhere": true,
     "sourceType": "module"
