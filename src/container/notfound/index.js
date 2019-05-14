@@ -1,14 +1,16 @@
 /** 404 NotFound **/
 import React from 'react';
 
-import './index.less';
+import CSSModules from 'react-css-modules';
+import styles from './index.less';
 
-function NotFoundPageContainer() {
-  return (
-    <div className='page-notfound'>
-      <div className='box'>404 not found</div>
-    </div>
-  );
+@CSSModules(styles)
+export default class NotFoundPageContainer extends React.PureComponent {
+  render() {
+    return (
+      <div styleName='page-notfound'>
+        <div styleName='box'>404 not found</div>
+      </div>
+    );
+  }
 }
-
-export default NotFoundPageContainer;

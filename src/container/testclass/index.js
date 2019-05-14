@@ -6,9 +6,11 @@ import { connect } from 'react-redux';
 import { Route, Switch, Link } from 'react-router-dom';
 import P from 'prop-types';
 
+import CSSModules from 'react-css-modules';
+
 /** 所需的所有资源 **/
 import { Button, Modal, message, Form } from 'antd';
-import './index.less';
+import styles from './index.less';
 import ImgTest from '../../assets/test.jpg';
 import Mp3 from '../../assets/starSky.mp3';
 import Page1 from './container/page1'; // 子页面1
@@ -16,6 +18,7 @@ import Page2 from './container/page2'; // 子页面2
 import Page3 from './container/page3'; // 子页面3
 
 /** 组件 **/
+@CSSModules(styles)
 class TestPageContainer extends React.Component {
   static propTypes = {
     count: P.number, // 来自store - test model中的全局变量count
@@ -188,14 +191,14 @@ class TestPageContainer extends React.Component {
     const { form } = this.props;
 
     return (
-      <div className='page-test'>
-        <h1 className='title'>功能测试</h1>
-        <div className='box'>
-          <div className='list'>
+      <div styleName='page-test'>
+        <h1>功能测试</h1>
+        <div styleName='box'>
+          <div styleName='list'>
             <h2>引入图片</h2>
             <p>
               <img src={ImgTest} style={{ height: '150px' }} />
-              <span className='backImage' />
+              <span styleName='backImage' />
               <span>上方图片，一张是img,一张是background</span>
               <br />
               <span>请特别注意，现在webpack.production.config.js中的publicPath配置为"/"，</span>
@@ -207,19 +210,19 @@ class TestPageContainer extends React.Component {
               </span>
             </p>
           </div>
-          <div className='list'>
+          <div styleName='list'>
             <h2>引入其他种类的资源</h2>
             <p>
               <audio src={Mp3} controls />
             </p>
           </div>
-          <div className='list'>
+          <div styleName='list'>
             <h2>LESS测试</h2>
             <p>
-              <span className={'less_btn'}>来自LESS样式</span>
+              <span>来自LESS样式</span>
             </p>
           </div>
-          <div className='list'>
+          <div styleName='list'>
             <h2>Antd组件测试</h2>
             <p>
               <Button type='primary'>普通按钮</Button>
@@ -234,7 +237,7 @@ class TestPageContainer extends React.Component {
               &nbsp;
             </p>
           </div>
-          <div className='list'>
+          <div styleName='list'>
             <h2>location对象测试</h2>
             <p>
               当前路由：
@@ -252,7 +255,7 @@ class TestPageContainer extends React.Component {
             </p>
             <p>所有页面都自动被注入location、match、history对象</p>
           </div>
-          <div className='list'>
+          <div styleName='list'>
             <h2>action测试</h2>
             <p>
               <Button type='primary' onClick={() => this.props.actions.onTestAdd(this.props.count)}>
@@ -263,9 +266,9 @@ class TestPageContainer extends React.Component {
               {this.state.count}
             </p>
           </div>
-          <div className='list'>
+          <div styleName='list'>
             <h2>异步请求测试（Mock模拟数据）</h2>
-            <div className='pbox'>
+            <div styleName='pbox'>
               <Button type='primary' onClick={this.onAjaxClick}>
                 ajax请求测试(使用的reqwest库)
               </Button>
@@ -277,7 +280,7 @@ class TestPageContainer extends React.Component {
                 ))}
               </ul>
             </div>
-            <div className='pbox'>
+            <div styleName='pbox'>
               <Button type='primary' onClick={() => this.onFetchClick()}>
                 fetch请求测试(使用的axios库)
               </Button>
@@ -290,9 +293,9 @@ class TestPageContainer extends React.Component {
               </ul>
             </div>
           </div>
-          <div className='list'>
+          <div styleName='list'>
             <h2>嵌套路由测试</h2>
-            <div className='sonTest'>
+            <div styleName='sonTest'>
               <Link to={`${this.props.match.url}/Page1`}>子页1</Link>
               <Link to={`${this.props.match.url}/Page2`}>子页2</Link>
               <Link to={`${this.props.match.url}/Page3`}>子页3</Link>
